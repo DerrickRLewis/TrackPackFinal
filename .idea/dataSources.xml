@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="470976021">
+    <data-source source="LOCAL" name="PostgreSQL - trackpack@localhost" uuid="4ed9a436-4f5f-454d-a51f-1056a487a7d2">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/trackpack</jdbc-url>
+    </data-source>
+  </component>
+</project>

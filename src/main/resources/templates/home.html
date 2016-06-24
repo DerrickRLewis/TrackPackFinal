@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TrackPack</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>body {margin-bottom: 2rem;} .table { margin-top: 2rem; }</style>
+</head>
+
+
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <img style="max-height: 100%; transform: scale(1.3); margin-left: 1rem;" alt="Brand" src="/trackpacklogo.png">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <form class="navbar-form navbar-right" action="/logout" method="post">
+                <button class="btn btn-primary" type="submit">Logout</button>
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            {{^user}}
+
+                {{#invalidUser}}
+                    <H1>Error: Invalid login</H1>
+                {{/invalidUser}}
+                <!--<form action="/login" method="post">-->
+                <!--<input type="text" placeholder="Username" name="userName" required/>-->
+                <!--<input type="password" placeholder="Password" name="password" required/>-->
+                <!--<button type="submit">Login</button>-->
+                <!--</form>-->
+            {{/user}}
+
+            {{#user}}
+            <div class="alert alert-success">Welcome, {{name}}</div>
+
+
+            <div id="top">
+                <H1>TrackPack</H1>
+            </div>
+
+            <form action="/track-number" method="post">
+                <div class="form-group">
+                    <label for="tracking">Tracking #</label>
+                    <input class="form-control" type="text" placeholder="Enter your tracking number" id="tracking" name="tracking" />
+                </div>
+                <div class="form-group">
+                    <label for="slug">Shipping Company</label>
+                    <input class="form-control" type="text" placeholder="Enter the shipping company" name="slug" />
+                </div>
+                <button class="btn btn-primary" type="submit">Track Pack</button>
+            </form>
+
+
+
+
+            <div id="status info">
+                <table class="table table-striped">
+                    <tr><th>TRACKING NUMBER</th>
+                        <th>SHIPPING COMPANY</th>
+                        <th>SHIPPED BY</th>
+                        <th>SIGNED BY</th>
+                        <th>INSURED</th>
+                        <th>SHIPPED DATE</th>
+                        <th>DELIVERY DATE</th>
+                    </tr>
+                    {{#trackedData}}
+                    <tr>
+                        <td>{{trackingNumber}}</td>
+                        <td>{{shippingCompany}}</td>
+                        <td>{{shippersName}}</td>
+                        <td>{{signedBy}}</td>
+                        <td>{{insured}}</td>
+                        <td>{{shippedDate}}</td>
+                        <td>{{deliverDate}}</td>
+                    </tr>
+                    {{/trackedData}}
+                </table>
+            </div>
+
+
+
+            <br>
+            <br>
+            <form action="/get-rates" method="post">
+
+                <fieldset>
+                    <div class="form-group">
+                        <label>Ship From Address</label>
+                        <input class="form-control" type="text" placeholder="Enter your Address" name="fromStreet"/>
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input class="form-control" type="text" placeholder="Enter your City" name="fromCity" />
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <input class="form-control" type="text" placeholder="Enter your State" name="fromState" />
+                    </div>
+                    <div class="form-group">
+                        <label>Zip Code</label>
+                        <input class="form-control" type="text" placeholder="Enter your Zip" name="fromZip"/>
+                    </div>
+                </fieldset>
+                <br>
+                <fieldset>
+                    <div class="form-group">
+
+                        <label>Ship To Address</label>
+                        <input class="form-control" type="text"  placeholder="Enter your Address" name="toStreet"/>
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input class="form-control" type="text"  placeholder="Enter your City" name="toCity"/>
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <input class="form-control" type="text"   placeholder="Enter your State" name="toState"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Zip Code</label>
+                        <input class="form-control" type="text"  placeholder="Enter your Zip" name="toZip"/>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Get Rates</button>
+                </fieldset>
+
+            </form>
+
+            <div id="rates info">
+                <table class="table table-striped">
+                    <tr><th>SHIPPING COMPANY</th>
+                        <th>COST</th>
+                        <th>DELIVERY DATE</th>
+
+                    </tr>
+                    {{#rateList}}
+                    <tr>
+                        <td>{{slug}}</td>
+                        <td>{{shippingCost}}</td>
+                        <td>{{arrivalDate}}</td>
+                    </tr>
+                    {{/rateList}}
+                </table>
+            </div>
+            {{/user}}
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
